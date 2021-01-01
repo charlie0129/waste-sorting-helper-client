@@ -1,13 +1,15 @@
 export default {
   pages: [
     'pages/home/home-page',
-    'pages/about-me/about-me-page'
+    'pages/about-me/about-me-page',
+    'pages/login/login-page'
   ],
   window: {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'WeChat',
-    navigationBarTextStyle: 'black'
+    navigationBarTextStyle: 'black',
+    enablePullDownRefresh: true,
   },
   tabBar: {
     color: '#666',
