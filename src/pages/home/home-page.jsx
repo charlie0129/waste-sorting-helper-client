@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import ActionFloor from '@/components/navigation/action-floor'
+import { AtButton } from 'taro-ui'
+import NavigationService from '@/nice-router/navigation-service'
+import { setGlobalData, getGlobalData } from '@/utils/index'
+import Listof from '@/listof/listof'
 import './home-page.scss'
+
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -19,6 +24,17 @@ export default class HomePage extends Component {
           linkToUrl: 'page:///pages/about-me/about-me-page',
         },
       ],
+      userCard: [
+        {
+          id: 1,
+          title: '姜洪烨',
+          brief: '学号：' + '2019211915' + '\n积分：' + '34',
+          status: '已登录',
+          imageUrl:
+            'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
+        },
+      ],
+      userId: ''
     }
   }
   componentWillMount() {}
@@ -27,13 +43,32 @@ export default class HomePage extends Component {
 
   componentWillUnmount() {}
 
-  componentDidShow() {}
+  componentDidShow() {
+
+    this.setState(state => ({
+      userId: getGlobalData('userId')
+    }));
+  }
 
   componentDidHide() {}
 
+  loginHandler = () => {
+    NavigationService.navigate('/pages/login/login-page')
+  }
+
   render() {
     return (
-      <View className="home-page">
+      <View className='home-page'>
+        <view>
+          {this.state.userId === '' && (
+            <AtButton className='login-button' onClick={this.loginHandler}>
+              登录
+            </AtButton>
+          )}
+          {this.state.userId !== '' && (
+            <Listof list={this.state.userCard} displayMode='big-card' />
+          )}
+        </view>
         <view>
           <ActionFloor actions={this.state.actionList} />
         </view>

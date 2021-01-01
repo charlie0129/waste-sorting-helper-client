@@ -1,0 +1,28 @@
+@import 'src/styles/theme';
+
+.home-page {
+  @extend %page;
+
+  .my-test {
+    .at-avatar__img {
+      width: 50px;
+    }
+  }
+
+  &-action-floor {
+    margin: 20px 10px;
+  }
+
+//   .login-button {
+//     margin-top: 80px;
+//     background-color: darken($primary-color, 20%);
+//     border-radius: 10px;
+//     margin-bottom: 40px;
+//     box-shadow: 0 15px 10px 1px rgba(40, 170, 255, 0.1);
+//     width: 100%;
+//     border: none;
+//     color: $white;
+//   }
+}
+
+
