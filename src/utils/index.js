@@ -4,6 +4,11 @@ import _ from 'lodash'
 
 let device = {}
 
+const globalData = {
+  userId: '',
+  userCredit: 0
+}
+
 function getDevice() {
   if (isEmpty(device)) {
     device = Taro.getSystemInfoSync()
@@ -205,4 +210,12 @@ export function diffTime(end, start = Date.now()) {
     result.push(`${seconds}秒`)
   }
   return result.join('')
+}
+
+export function setGlobalData (key, val) {
+  globalData[key] = val;
+}
+
+export function getGlobalData (key) {
+  return globalData[key];
 }
