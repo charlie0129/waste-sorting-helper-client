@@ -1,0 +1,84 @@
+@import 'src/styles/theme';
+
+.section-bar {
+  @extend %flex-column;
+
+  &-header {
+    @extend %flex-row;
+    align-items: center;
+    padding: 0 20px;
+    height: 80px;
+  }
+
+  .iconfont {
+    color: #ccc;
+    font-size: 36px;
+    font-weight: 800;
+  }
+
+  &-prefix {
+    width: 8px;
+    min-height: 1.2em;
+    background-color: $primary-color;
+    margin-right: 20px;
+  }
+
+  &-title {
+    color: $text-color;
+    font-size: 34px;
+    font-weight: 700;
+  }
+
+  &-action {
+    @extend %flex-row;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    text-align: center;
+
+    &-title {
+      font-size: 28px;
+      font-weight: 500;
+      text-align: right;
+      padding-right: 10px;
+      color: #999;
+    }
+
+    .iconfont {
+      color: #999;
+      font-weight: 800;
+    }
+  }
+
+  // section-bar  里面的form-item
+  .form-item {
+    padding-left: 20px;
+  }
+}
+
+.section-bar--disabled {
+  .section-bar-header {
+    opacity: 0.7;
+  }
+
+  .section-bar-title {
+    color: $text-color-lighter;
+  }
+}
+
+.section-bar--foldable {
+  .section-bar-header {
+    border-bottom: $border-default;
+  }
+}
+
+.section-bar--bordered {
+  border: $border-default;
+}
+
+.section-bar--highlight {
+  .section-bar-header {
+    background-color: #ddd;
+  }
+}
