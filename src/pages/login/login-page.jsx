@@ -1,6 +1,6 @@
 import React from 'react'
 // import ServerImage from '@/server-image/server-image'
-import Config from '@/utils/config'
+// import Config from '@/utils/config'
 import { Text, View } from '@tarojs/components'
 // import loginLogo from '../../assets/login-logo.png'
 
@@ -12,13 +12,12 @@ export default function LoginPage() {
     <View className='login-page'>
       <View className='login-page-header'>
         <View className='login-page-header-txt'>
-          <Text>{Config.name}</Text>
+          <Text>登录（测试）</Text>
         </View>
         {/* <ServerImage className='login-page-header-logo' src={loginLogo} /> */}
       </View>
 
       <View className='login-page-body'>
-        <View className='login-form-brief'>WELCOME TO LOGIN</View>
         <View className='form-form-title'>欢迎登录</View>
 
         <PasswordLoginForm />

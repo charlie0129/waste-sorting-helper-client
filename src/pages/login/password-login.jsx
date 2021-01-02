@@ -28,7 +28,7 @@ export default function PasswordForm() {
       <View className='login-form-fields'>
         <EleInput
           className='login-form-fields-input'
-          placeholder='请输入用户名'
+          placeholder='请输入学号'
           name='login'
           value={login}
           onChange={setLogin}
