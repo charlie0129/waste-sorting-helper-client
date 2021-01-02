@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import { AtButton } from 'taro-ui'
 import { View } from '@tarojs/components'
 import ActionFloor from '@/components/navigation/action-floor'
-import { AtButton } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
 import { setGlobalData, getGlobalData } from '@/utils/index'
 import Listof from '@/listof/listof'
+import 'taro-ui/dist/style/components/button.scss'
 import './home-page.scss'
 
 
@@ -23,6 +24,10 @@ export default class HomePage extends Component {
           title: '查询垃圾投放点',
           linkToUrl: 'page:///pages/about-me/about-me-page',
         },
+        {
+          id: 3,
+          title: '查询垃圾投放记录',
+        }
       ],
       userCard: [
         {
@@ -44,7 +49,6 @@ export default class HomePage extends Component {
   componentWillUnmount() {}
 
   componentDidShow() {
-
     this.setState(state => ({
       userId: getGlobalData('userId')
     }));
@@ -61,7 +65,7 @@ export default class HomePage extends Component {
       <View className='home-page'>
         <view>
           {this.state.userId === '' && (
-            <AtButton className='login-button' onClick={this.loginHandler}>
+            <AtButton className='primary' onClick={this.loginHandler}>
               登录
             </AtButton>
           )}
