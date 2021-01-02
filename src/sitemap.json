@@ -1,0 +1,16 @@
+{
+  "rules": [
+    {
+      "action": "disallow",
+      "page": "pages/me/about-me-page"
+    },
+    {
+      "action": "disallow",
+      "page": "pages/login/login-page"
+    },
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}
