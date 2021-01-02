@@ -3,11 +3,11 @@ import { AtButton } from 'taro-ui'
 import { View } from '@tarojs/components'
 import ActionFloor from '@/components/navigation/action-floor'
 import NavigationService from '@/nice-router/navigation-service'
+import SectionBar from '@/components/section-bar/section-bar'
 import { setGlobalData, getGlobalData } from '@/utils/index'
 import Listof from '@/listof/listof'
 import 'taro-ui/dist/style/components/button.scss'
 import './home-page.scss'
-
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -27,19 +27,20 @@ export default class HomePage extends Component {
         {
           id: 3,
           title: '查询垃圾投放记录',
-        }
-      ],
-      userCard: [
-        {
-          id: 1,
-          title: '姜洪烨',
-          brief: '学号：' + '2019211915' + '\n积分：' + '34',
-          status: '已登录',
-          imageUrl:
-            'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
         },
       ],
-      userId: ''
+      // userCard: [
+      //   {
+      //     id: 1,
+      //     title: '（用户名）',
+      //     brief: '',
+      //     status: '已登录',
+      //     imageUrl:
+      //       'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
+      //   },
+      // ],
+      // userId: ''
+      userCard: {},
     }
   }
   componentWillMount() {}
@@ -49,9 +50,27 @@ export default class HomePage extends Component {
   componentWillUnmount() {}
 
   componentDidShow() {
-    this.setState(state => ({
-      userId: getGlobalData('userId')
-    }));
+    console.log('home page shown')
+    // this.state.userId = getGlobalData('userId');
+    // this.setState(state => ({
+    //   userId: getGlobalData('userId')
+    // }));
+
+    const newUserCard = [
+      {
+        id: 1,
+        title: '（用户名）',
+        brief: '学号：' + getGlobalData('userId') + '\n积分：' + 666,
+        status: '已登录',
+        imageUrl:
+          'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
+      },
+    ]
+    console.log(newUserCard)
+
+    this.setState((state) => ({
+      userCard: newUserCard,
+    }))
   }
 
   componentDidHide() {}
@@ -62,15 +81,18 @@ export default class HomePage extends Component {
 
   render() {
     return (
-      <View className='home-page'>
+      <View className="home-page">
         <view>
-          {this.state.userId === '' && (
-            <AtButton className='primary' onClick={this.loginHandler}>
+          {getGlobalData('userId') === '' && (
+            <AtButton className="primary" onClick={this.loginHandler}>
               登录
             </AtButton>
           )}
-          {this.state.userId !== '' && (
-            <Listof list={this.state.userCard} displayMode='big-card' />
+          {getGlobalData('userId') !== '' && (
+            <Listof
+              list={this.state.userCard}
+              displayMode="big-card"
+            />
           )}
         </view>
         <view>
