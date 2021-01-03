@@ -5,8 +5,9 @@ import _ from 'lodash'
 let device = {}
 
 const globalData = {
-  userId: '',
-  userCredit: 0
+  userId: '2019211915',
+  userCredit: 0,
+  server: 'http://localhost:8080'
 }
 
 function getDevice() {

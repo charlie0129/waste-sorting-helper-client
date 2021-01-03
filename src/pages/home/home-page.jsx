@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AtButton } from 'taro-ui'
+import { AtButton, AtIcon } from 'taro-ui'
 import { View } from '@tarojs/components'
 import ActionFloor from '@/components/navigation/action-floor'
 import NavigationService from '@/nice-router/navigation-service'
@@ -8,6 +8,7 @@ import { setGlobalData, getGlobalData } from '@/utils/index'
 import Listof from '@/listof/listof'
 import 'taro-ui/dist/style/components/button.scss'
 import './home-page.scss'
+
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -27,20 +28,10 @@ export default class HomePage extends Component {
         {
           id: 3,
           title: '查询垃圾投放记录',
+          linkToUrl: 'page:///pages/history/history-page',
         },
       ],
-      // userCard: [
-      //   {
-      //     id: 1,
-      //     title: '（用户名）',
-      //     brief: '',
-      //     status: '已登录',
-      //     imageUrl:
-      //       'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
-      //   },
-      // ],
-      // userId: ''
-      userCard: {},
+      userCard: [],
     }
   }
   componentWillMount() {}
@@ -94,6 +85,9 @@ export default class HomePage extends Component {
               displayMode="big-card"
             />
           )}
+        </view>
+        <view>
+          <AtIcon value='clock' size='30' color='#976bff' />
         </view>
         <view>
           <ActionFloor actions={this.state.actionList} />

@@ -2,7 +2,8 @@ export default {
   pages: [
     'pages/home/home-page',
     'pages/about-me/about-me-page',
-    'pages/login/login-page'
+    'pages/login/login-page',
+    'pages/history/history-page'
   ],
   window: {
     backgroundTextStyle: 'light',
