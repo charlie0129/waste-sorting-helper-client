@@ -23,7 +23,7 @@ export default class HistoryPage extends Component {
       wasteList: [
         {
           id: 1,
-          title: '正在查询',
+          title: '正在查询...',
         },
       ],
     }
@@ -91,7 +91,7 @@ export default class HistoryPage extends Component {
         const newWasteListItem = [
           {
             id: 1,
-            title: '请求失败',
+            title: '查询失败',
           },
         ]
         this.setState((state) => ({

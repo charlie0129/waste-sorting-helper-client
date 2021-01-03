@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import { AtButton, AtIcon } from 'taro-ui'
 import { View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import ActionFloor from '@/components/navigation/action-floor'
 import NavigationService from '@/nice-router/navigation-service'
 import SectionBar from '@/components/section-bar/section-bar'
 import { setGlobalData, getGlobalData } from '@/utils/index'
 import Listof from '@/listof/listof'
+import userImage from '../../assets/icons/md-person.png'
+import cameraImage from '../../assets/icons/ios-camera.png'
+import statsImage from '../../assets/icons/ios-stats.png'
+import trashImage from '../../assets/icons/md-trash.png'
 import 'taro-ui/dist/style/components/button.scss'
 import './home-page.scss'
-
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -19,16 +23,25 @@ export default class HomePage extends Component {
           id: 1,
           title: '扫码扔垃圾',
           linkToUrl: 'page:///pages/about-me/about-me-page',
+          brief: '',
+          mode: ['circle', 'small'],
+          imageUrl: cameraImage
         },
         {
           id: 2,
           title: '查询垃圾投放点',
           linkToUrl: 'page:///pages/about-me/about-me-page',
+          brief: '',
+          mode: ['circle', 'small'],
+          imageUrl: trashImage
         },
         {
           id: 3,
           title: '查询垃圾投放记录',
           linkToUrl: 'page:///pages/history/history-page',
+          breif: '',
+          mode: ['circle', 'small'],
+          imageUrl: statsImage
         },
       ],
       userCard: [],
@@ -50,11 +63,15 @@ export default class HomePage extends Component {
     const newUserCard = [
       {
         id: 1,
-        title: '（用户名）',
-        brief: '学号：' + getGlobalData('userId') + '\n积分：' + 666,
+        title: getGlobalData('userName'),
+        brief:
+          '学号：' +
+          getGlobalData('userId') +
+          '\n积分：' +
+          getGlobalData('userCredit'),
         status: '已登录',
-        imageUrl:
-          'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
+        imageUrl: userImage,
+        mode: ['circle']
       },
     ]
     console.log(newUserCard)
@@ -64,7 +81,25 @@ export default class HomePage extends Component {
     }))
   }
 
-  componentDidHide() {}
+  componentDidHide() {
+    if (getGlobalData('userId') !== '') {
+      Taro.request({
+        url: getGlobalData('server') + '/get-credit',
+        method: 'GET',
+        data: {
+          id: getGlobalData('userId'),
+        },
+        dataType: 'json',
+        success: (res) => {
+          if (res.data == '') {
+          } else {
+            setGlobalData('userCredit', res.data)
+          }
+        },
+        fail: (res) => {},
+      })
+    }
+  }
 
   loginHandler = () => {
     NavigationService.navigate('/pages/login/login-page')
@@ -80,18 +115,18 @@ export default class HomePage extends Component {
             </AtButton>
           )}
           {getGlobalData('userId') !== '' && (
-            <Listof
-              list={this.state.userCard}
-              displayMode="big-card"
-            />
+            <Listof list={this.state.userCard} displayMode="big-card" />
           )}
         </view>
-        <view>
-          <AtIcon value='clock' size='30' color='#976bff' />
-        </view>
-        <view>
-          <ActionFloor actions={this.state.actionList} />
-        </view>
+        {/* <view>
+          <AtIcon value="clock" size="30" color="#976bff" />
+        </view> */}
+
+        {getGlobalData('userId') !== '' && (
+          <view>
+            <Listof list={this.state.actionList} displayMode="h-card" />
+          </view>
+        )}
       </View>
     )
   }

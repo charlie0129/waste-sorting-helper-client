@@ -55,7 +55,7 @@ export default function PasswordForm() {
                 Taro.atMessage({
                   'message': '登录成功',
                   'type': 'success',
-                })
+                });
                 NavigationService.back({}, this);
               }
             },
