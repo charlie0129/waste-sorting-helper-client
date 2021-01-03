@@ -3,7 +3,8 @@ export default {
     'pages/home/home-page',
     'pages/about-me/about-me-page',
     'pages/login/login-page',
-    'pages/history/history-page'
+    'pages/history/history-page',
+    'pages/map/map-page'
   ],
   window: {
     backgroundTextStyle: 'light',

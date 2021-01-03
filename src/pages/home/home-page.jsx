@@ -24,15 +24,15 @@ export default class HomePage extends Component {
           title: '扫码扔垃圾',
           linkToUrl: 'page:///pages/about-me/about-me-page',
           brief: '',
-          mode: ['circle', 'small'],
+          mode: ['small'],
           imageUrl: cameraImage
         },
         {
           id: 2,
           title: '查询垃圾投放点',
-          linkToUrl: 'page:///pages/about-me/about-me-page',
+          linkToUrl: 'page:///pages/map/map-page',
           brief: '',
-          mode: ['circle', 'small'],
+          mode: ['small'],
           imageUrl: trashImage
         },
         {
@@ -40,7 +40,7 @@ export default class HomePage extends Component {
           title: '查询垃圾投放记录',
           linkToUrl: 'page:///pages/history/history-page',
           breif: '',
-          mode: ['circle', 'small'],
+          mode: ['small'],
           imageUrl: statsImage
         },
       ],
@@ -110,7 +110,7 @@ export default class HomePage extends Component {
       <View className="home-page">
         <view>
           {getGlobalData('userId') === '' && (
-            <AtButton className="primary" onClick={this.loginHandler}>
+            <AtButton type="primary" onClick={this.loginHandler}>
               登录
             </AtButton>
           )}
