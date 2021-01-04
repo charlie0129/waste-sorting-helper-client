@@ -14,3 +14,29 @@ See also: [waste-sorting-helper-server](https://github.com/charlie0129/waste-sor
     - [ ] Location
     - [ ] Full or not
 
+## How to run this project
+
+1. Clone this repository
+
+   `https://github.com/charlie0129/waste-sorting-helper-client.git`
+
+2. Install Taro
+
+   ```shell
+   npm i -g @tarojs/cli
+   ```
+   
+3. Install dependencies
+
+   ```shell
+cd waste-sorting-helper-client
+   npm install
+   ```
+   
+4. Build & run
+
+    ```shell
+    taro build --type weapp
+    ```
+5. Open `Wechat Devtools` and run the project at `/dist`
+
