@@ -25,18 +25,19 @@ See also: [waste-sorting-helper-server](https://github.com/charlie0129/waste-sor
    ```shell
    npm i -g @tarojs/cli
    ```
-   
+
 3. Install dependencies
 
    ```shell
-cd waste-sorting-helper-client
+   cd waste-sorting-helper-client
    npm install
    ```
-   
+
 4. Build & run
 
     ```shell
     taro build --type weapp
     ```
+
 5. Open `Wechat Devtools` and run the project at `/dist`
 
