@@ -110,7 +110,7 @@ export default class HomePage extends Component {
       <View className="home-page">
         <view>
           {getGlobalData('userId') === '' && (
-            <AtButton type="primary" onClick={this.loginHandler}>
+            <AtButton type="primary" onClick={this.loginHandler} className='login-button'>
               登录
             </AtButton>
           )}
@@ -127,6 +127,9 @@ export default class HomePage extends Component {
             <Listof list={this.state.actionList} displayMode="h-card" />
           </view>
         )}
+        {/* <view>
+            <Listof list={this.state.actionList} displayMode="h-card" />
+        </view> */}
       </View>
     )
   }
