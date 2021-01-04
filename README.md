@@ -1,4 +1,4 @@
-# waste-sorting-helper-weapp
+# waste-sorting-helper-client
 Front end (WeChat app) for project "Research on campus garbage sorting and Recycling".  
 See also: [waste-sorting-helper-server](https://github.com/charlie0129/waste-sorting-helper-server).
 
