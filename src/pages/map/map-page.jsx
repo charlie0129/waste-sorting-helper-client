@@ -7,19 +7,28 @@ export default class MapPage extends Component {
     super(props)
     this.state = {}
     this.data = {
-        longitude: 116.283188,
-        latitude: 40.1564221,
-        showScale: true,
-        showCompass: true,
-        markers: [
-            {
-                id: 1,
-                longitude: 116.283188,
-                latitude: 40.1564221,
-                title: '北京邮电大学雁南',
-                iconPath: 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker1_Activated@3x.png',
-            }
-        ]
+      longitude: 116.283188,
+      latitude: 40.1564221,
+      showScale: true,
+      showCompass: true,
+      markers: [
+        {
+          id: 1,
+          longitude: 116.283188,
+          latitude: 40.1564221,
+          title: '北京邮电大学雁南',
+          iconPath:
+            'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker1_Activated@3x.png',
+        },
+        {
+          id: 1,
+          longitude: 116.282188,
+          latitude: 40.1554221,
+          title: '北京邮电大学雁南',
+          iconPath:
+            'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker1_Activated@3x.png',
+        },
+      ],
     }
   }
 
@@ -37,6 +46,7 @@ export default class MapPage extends Component {
     return (
       <View className="map-page">
         <Map
+          className="dustbin-map"
           longitude={this.data.longitude}
           latitude={this.data.latitude}
           showScale={this.data.showScale}
