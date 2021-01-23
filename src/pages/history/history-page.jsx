@@ -75,8 +75,8 @@ export default class HistoryPage extends Component {
           newWasteListItem.push({
             id: element.id,
             title:
-              dateFormatted.substring(5, 7) + '月' + dateFormatted.substring(8, 10) + '日 ' + categoryNameChs + ' ' + '0kg',
-            brief: dateFormatted + ', ' + '北京邮电大学雁南',
+              dateFormatted.substring(5, 7) + '月' + dateFormatted.substring(8, 10) + '日 ' + categoryNameChs + ' ' + element.weight +'kg',
+            brief: dateFormatted + ', ' + element.dustbin.name,
             imageUrl: wasteImage,
             mode: ['circle']
           })
