@@ -21,8 +21,9 @@ export default function PasswordForm() {
             },
             dataType: 'json',
             success: (res) => {
-                if (res.data == '') {
+                if (res.statusCode == 404) {
                     console.log('get-user failed')
+                    console.log(res)
                     Taro.atMessage({
                         message: '用户不存在',
                         type: 'error'
@@ -31,6 +32,7 @@ export default function PasswordForm() {
                     setGlobalData('userId', login)
                     setGlobalData('userName', res.data)
                     console.log('get-user succeed')
+                    console.log(res)
                     console.log(getGlobalData('userId'))
                     console.log(getGlobalData('userName'))
 
@@ -67,9 +69,10 @@ export default function PasswordForm() {
             },
             fail: (res) => {
                 Taro.atMessage({
-                    message: '网络错误',
+                    message: '登录错误',
                     type: 'error'
                 })
+
                 console.log('get-user failed')
             }
         })
