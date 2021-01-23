@@ -12,7 +12,7 @@ export default function LoginPage() {
     <View className='login-page'>
       <View className='login-page-header'>
         <View className='login-page-header-txt'>
-          <Text>登录（测试）</Text>
+          <Text>登录</Text>
         </View>
         {/* <ServerImage className='login-page-header-logo' src={loginLogo} /> */}
       </View>
