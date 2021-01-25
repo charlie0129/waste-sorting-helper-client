@@ -78,6 +78,10 @@ export default function PasswordForm() {
         })
     }
 
+    const handleRegister = () => {
+
+    }
+
     return (
         <Block>
             <View className='login-form-fields'>
@@ -92,6 +96,9 @@ export default function PasswordForm() {
             </View>
             <AtButton className='login-button' onClick={handleSubmit}>
                 登录
+            </AtButton>
+            <AtButton className='register-button' onClick={handleRegister}>
+                注册
             </AtButton>
         </Block>
     )
