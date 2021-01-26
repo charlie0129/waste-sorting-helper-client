@@ -91,18 +91,18 @@ export default class HistoryPage extends Component {
                     })
                 })
 
-                if (newWasteListItem.length <=20) {
-                    if(newWasteListItem.length === 0) {
+                if (newWasteListItem.length < 20) {
+                    if (newWasteListItem.length === 0) {
                         newWasteListItem.push({
                             id: 1,
                             title: '暂无'
                         })
                     }
 
-                        this.setState({
-                            wasteList: newWasteListItem,
-                            isFullListLoaded: true
-                        })
+                    this.setState({
+                        wasteList: newWasteListItem,
+                        isFullListLoaded: true
+                    })
                 } else {
                     this.setState((state) => ({
                         wasteList: newWasteListItem,
