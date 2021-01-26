@@ -90,10 +90,27 @@ export default class HistoryPage extends Component {
                         mode: ['circle']
                     })
                 })
-                this.setState((state) => ({
-                    wasteList: newWasteListItem,
-                    isFullListLoaded: isFullList
-                }))
+
+                if (newWasteListItem.length <=20) {
+                    if(newWasteListItem.length === 0) {
+                        newWasteListItem.push({
+                            id: 1,
+                            title: '暂无'
+                        })
+                    }
+
+                        this.setState({
+                            wasteList: newWasteListItem,
+                            isFullListLoaded: true
+                        })
+                } else {
+                    this.setState((state) => ({
+                        wasteList: newWasteListItem,
+                        isFullListLoaded: isFullList
+                    }))
+                }
+
+
             },
             fail: (res) => {
                 console.log('request failed')
