@@ -10,7 +10,6 @@ export default class MapPage extends Component {
         super(props)
         // this.state = {}
         this.state = {
-            // TODO: Update this with user's location
             longitude: 116.283188,
             latitude: 40.1564221,
             showScale: true,
@@ -29,6 +28,27 @@ export default class MapPage extends Component {
     }
 
     componentDidShow() {
+        Taro.getLocation({
+            type: 'wgs84',
+            success: (res) => {
+                Taro.atMessage({
+                    message: '已显示您附近的视图',
+                    type: 'error'
+                })
+                this.setState({
+                    longitude: res.longitude,
+                    latitude: res.latitude
+                })
+            },
+            fail: () => {
+                Taro.atMessage({
+                    message: '无法获取当前位置，视图可能与您所在位置不符',
+                    type: 'error'
+                })
+            }
+
+        })
+
         Taro.request({
             url: getGlobalData('server') + '/get-dustbin-list',
             method: 'GET',
@@ -45,7 +65,7 @@ export default class MapPage extends Component {
                         longitude: element.longitude,
                         latitude: element.latitude,
                         title: element.name,
-                        iconPath: 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker1_Activated@3x.png'
+                        // iconPath: 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker1_Activated@3x.png'
                     })
                 })
 
@@ -57,7 +77,7 @@ export default class MapPage extends Component {
                 console.log('request failed')
                 console.log(res)
                 Taro.atMessage({
-                    message: '获取积分出错',
+                    message: '投放点信息出错',
                     type: 'error'
                 })
             }
