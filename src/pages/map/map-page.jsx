@@ -27,28 +27,7 @@ export default class MapPage extends Component {
     componentWillUnmount() {
     }
 
-    componentDidShow() {
-        Taro.getLocation({
-            type: 'wgs84',
-            success: (res) => {
-                Taro.atMessage({
-                    message: '已显示您附近的视图',
-                    type: 'error'
-                })
-                this.setState({
-                    longitude: res.longitude,
-                    latitude: res.latitude
-                })
-            },
-            fail: () => {
-                Taro.atMessage({
-                    message: '无法获取当前位置，视图可能与您所在位置不符',
-                    type: 'error'
-                })
-            }
-
-        })
-
+    getMarkers() {
         Taro.request({
             url: getGlobalData('server') + '/get-dustbin-list',
             method: 'GET',
@@ -72,16 +51,98 @@ export default class MapPage extends Component {
                 this.setState((state) => ({
                     markers: newMarkerList
                 }))
+
+                this.getDistances()
             },
             fail: (res) => {
                 console.log('request failed')
                 console.log(res)
                 Taro.atMessage({
-                    message: '投放点信息出错',
+                    message: '投放点信息获取出错',
                     type: 'error'
                 })
             }
         })
+    }
+
+
+    getDistances() {
+        let distances = []
+
+        function Rad(d){
+            return d * Math.PI / 180.0;//经纬度转换成三角函数中度分表形式。
+        }
+
+        //计算距离，参数分别为第一点的纬度，经度；第二点的纬度，经度
+        function GetDistance(lat1,lng1,lat2,lng2){
+            var radLat1 = Rad(lat1);
+            var radLat2 = Rad(lat2);
+            var a = radLat1 - radLat2;
+            var  b = Rad(lng1) - Rad(lng2);
+            var s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) +
+                                            Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+            s = s *6378.137 ;// EARTH_RADIUS;
+            s = Math.round(s * 10000) / 10000; //输出为公里
+            //s=s.toFixed(4);
+            return s;
+        }
+
+        this.state.markers.forEach((element) => {
+            distances.push(GetDistance(this.state.latitude, this.state.longitude, element.latitude, element.longitude))
+        })
+
+        console.log('Distances to current location: ' + distances)
+
+        let haveNearbyStations = false
+
+        distances.forEach((element) => {
+            if (element <= 1) {
+                haveNearbyStations = true
+            }
+        })
+
+        if (!haveNearbyStations) {
+            Taro.atMessage({
+                message: '提醒：方圆 1km 内无可用的垃圾投放点',
+                type: 'warning'
+            })
+        }
+    }
+
+
+
+    componentDidShow() {
+
+
+        Taro.getLocation({
+            type: 'wgs84',
+            success: (res) => {
+                console.log('get location succeed: lat='+res.latitude+',long='+res.longitude)
+                Taro.atMessage({
+                    message: '已显示您附近的视图',
+                    type: 'success'
+                })
+                this.setState({
+                    longitude: res.longitude,
+                    latitude: res.latitude
+                })
+                this.getMarkers()
+            },
+            fail: () => {
+                Taro.atMessage({
+                    message: '无法获取当前位置，视图可能与您所在位置不符',
+                    type: 'error'
+                })
+                this.getMarkers()
+            }
+
+        })
+
+
+
+
+
+
     }
 
     componentDidHide() {
