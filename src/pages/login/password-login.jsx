@@ -21,7 +21,7 @@ export default function PasswordForm() {
             },
             dataType: 'json',
             success: (res) => {
-                if (res.statusCode == 404) {
+                if (res.statusCode !== 200) {
                     console.log('get-user failed')
                     console.log(res)
                     Taro.atMessage({
@@ -76,10 +76,11 @@ export default function PasswordForm() {
                 console.log('get-user failed')
             }
         })
+
     }
 
     const handleRegister = () => {
-
+        NavigationService.navigate('/pages/register/register-page')
     }
 
     return (
@@ -89,6 +90,7 @@ export default function PasswordForm() {
                 <EleInput
                     className='login-form-fields-input'
                     placeholder='请输入学号'
+                    type='number'
                     name='login'
                     value={login}
                     onChange={setLogin}

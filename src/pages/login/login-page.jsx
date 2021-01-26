@@ -18,7 +18,7 @@ export default function LoginPage() {
       </View>
 
       <View className='login-page-body'>
-        <View className='form-form-title'>欢迎登录</View>
+        {/*<View className='form-form-title'>欢迎登录</View>*/}
 
         <PasswordLoginForm />
       </View>

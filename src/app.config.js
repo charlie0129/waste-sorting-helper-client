@@ -4,7 +4,8 @@ export default {
     'pages/about-me/about-me-page',
     'pages/login/login-page',
     'pages/history/history-page',
-    'pages/map/map-page'
+    'pages/map/map-page',
+    'pages/register/register-page'
   ],
   window: {
     backgroundTextStyle: 'light',
