@@ -71,7 +71,8 @@ export default class HomePage extends Component {
           getGlobalData('userCredit'),
         status: '已登录',
         imageUrl: userImage,
-        mode: ['circle']
+        mode: ['circle'],
+          linkToUrl: 'page://pages/about-me/about-me-page'
       },
     ]
     console.log(newUserCard)
@@ -95,6 +96,7 @@ export default class HomePage extends Component {
           } else {
             setGlobalData('userCredit', res.data)
           }
+          console.log('successfully updated credit: ' + res.data)
         },
         fail: (res) => {},
       })

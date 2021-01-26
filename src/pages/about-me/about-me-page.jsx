@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
+import { AtButton } from 'taro-ui'
 import Listof from '@/listof/listof'
+import { setGlobalData, getGlobalData } from '@/utils/index'
+import NavigationService from '@/nice-router/navigation-service'
 import NavigationLineItem from '@/components/navigation/navigation-line-item'
 import './about-me-page.scss'
+
 
 const lineItemNavigatorList = [
   {
@@ -14,20 +19,8 @@ const lineItemNavigatorList = [
 export default class AboutMe extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      // userCredit: 23,
-      // userId: 34,
-      userCard: [
-        {
-          id: 1,
-          title: '姜洪烨',
-          brief: '学号：' + '2019211915' + '\n积分：' + '34',
-          status: '已登录',
-          imageUrl:
-            'https://nice-router.oss-cn-chengdu.aliyuncs.com/avatar-1.png',
-        },
-      ],
-    }
+
+
   }
 
   componentWillMount() {}
@@ -40,16 +33,29 @@ export default class AboutMe extends Component {
 
   componentDidHide() {}
 
+  logoutHandler() {
+      setGlobalData('userName', '')
+      setGlobalData('userId', '')
+      setGlobalData('userCredit', '')
+      NavigationService.navigate('/pages/home/home-page')
+      // Taro.navigateBack({
+      //     delta: 1
+      // })
+  }
+
   render() {
     return (
       <View className="me-page">
-        <view>
-          <Listof list={this.state.userCard} displayMode="big-card" />
-        </view>
+        {/*<view>*/}
+        {/*  <Listof list={this.state.userCard} displayMode="big-card" />*/}
+        {/*</view>*/}
         <View className="me-page-body">
-          {lineItemNavigatorList.map((it) => (
-            <NavigationLineItem key={`${it.id}_${it.code}`} {...it} />
-          ))}
+          {/*{lineItemNavigatorList.map((it) => (*/}
+          {/*  <NavigationLineItem key={`${it.id}_${it.code}`} {...it} />*/}
+          {/*))}*/}
+            <AtButton type="primary" onClick={this.logoutHandler}>
+                退出登录
+            </AtButton>
         </View>
       </View>
     )
