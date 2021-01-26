@@ -44,6 +44,7 @@ export default class MapPage extends Component {
                         longitude: element.longitude,
                         latitude: element.latitude,
                         title: element.name,
+                        alpha: element.full ? 0.5 : 1
                         // iconPath: 'https://3gimg.qq.com/lightmap/xcx/demoCenter/images/Marker1_Activated@3x.png'
                     })
                 })

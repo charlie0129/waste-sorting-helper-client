@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AtButton, AtIcon } from 'taro-ui'
+import { AtButton, AtIcon, AtMessage } from 'taro-ui'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import ActionFloor from '@/components/navigation/action-floor'
@@ -59,6 +59,12 @@ export default class HomePage extends Component {
     // this.setState(state => ({
     //   userId: getGlobalData('userId')
     // }));
+      if(getGlobalData('userId') === '') {
+          Taro.atMessage({
+              message: '您还没登录，请先登录',
+              type: 'warning'
+          })
+      }
 
     const newUserCard = [
       {
@@ -110,6 +116,7 @@ export default class HomePage extends Component {
   render() {
     return (
       <View className="home-page">
+          <AtMessage />
         <view>
           {getGlobalData('userId') === '' && (
             <AtButton type="primary" onClick={this.loginHandler} className='login-button'>
