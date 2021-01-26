@@ -20,19 +20,20 @@ export default class RegisterPage extends Component {
     }
 
 
+    componentWillMount() {
+    }
 
+    componentDidMount() {
+    }
 
+    componentWillUnmount() {
+    }
 
+    componentDidShow() {
+    }
 
-    componentWillMount() {}
-
-    componentDidMount() {}
-
-    componentWillUnmount() {}
-
-    componentDidShow() {}
-
-    componentDidHide() {}
+    componentDidHide() {
+    }
 
     setEnteredId(enteredId) {
         this.setState({
@@ -71,7 +72,7 @@ export default class RegisterPage extends Component {
                         message: '学号已被注册',
                         type: 'error'
                     })
-                } else if (res.statusCode == 200){
+                } else if (res.statusCode == 200) {
                     console.log('add-user: succeed')
                     console.log(res)
                     Taro.atMessage({
@@ -145,89 +146,3 @@ export default class RegisterPage extends Component {
     }
 }
 
-// export default function RegisterPage() {
-//     const [userId, setUserId] = useState()
-//     const [userName, setUserName] = useState()
-//
-//     const handleSubmit = () => {
-//         Taro.request({
-//             url: getGlobalData('server') + '/add-user',
-//             method: 'POST',
-//             data: {
-//                 id: userId,
-//                 name: userName
-//             },
-//             dataType: 'json',
-//             success: (res) => {
-//                 if (res.statusCode == 409) {
-//                     console.log('add-user: duplicated user')
-//                     console.log(res)
-//                     Taro.atMessage({
-//                         message: '学号已被注册',
-//                         type: 'error'
-//                     })
-//                 } else if (res.statusCode == 200){
-//                     console.log('add-user: succeed')
-//                     console.log(res)
-//                     Taro.atMessage({
-//                         message: '注册成功',
-//                         type: 'success'
-//                     })
-//                 } else {
-//                     console.log('add-user: failed')
-//                     console.log(res)
-//                     Taro.atMessage({
-//                         message: '发生错误',
-//                         type: 'error'
-//                     })
-//                 }
-//             },
-//             fail: (res) => {
-//                 Taro.atMessage({
-//                     message: '网络错误',
-//                     type: 'error'
-//                 })
-//
-//                 console.log('get-user failed')
-//             }
-//         })
-//     }
-//
-//     return (
-//         <View className='login-page'>
-//             <View className='login-page-header'>
-//                 <View className='login-page-header-txt'>
-//                     <Text>注册</Text>
-//                 </View>
-//                 {/* <ServerImage className='login-page-header-logo' src={loginLogo} /> */}
-//             </View>
-//
-//             <View className='login-page-body'>
-//                 {/*<View className='form-form-title'>欢迎登录</View>*/}
-//
-//                 <Block>
-//                     <View className='login-form-fields'>
-//                         <AtMessage />
-//                         <EleInput
-//                             className='login-form-fields-input'
-//                             placeholder='请输入学号'
-//                             name='userId'
-//                             value={userId}
-//                             onChange={setUserId}
-//                         />
-//                         <EleInput
-//                             className='login-form-fields-input'
-//                             placeholder='请输入姓名'
-//                             name='userName'
-//                             value={userName}
-//                             onChange={setUserName}
-//                         />
-//                     </View>
-//                     <AtButton className='login-button' onClick={handleSubmit}>
-//                         注册
-//                     </AtButton>
-//                 </Block>
-//             </View>
-//         </View>
-//     )
-// }

@@ -10,54 +10,59 @@ import './about-me-page.scss'
 
 
 const lineItemNavigatorList = [
-  {
-    title: '查询详细垃圾投放记录',
-    icon: 'image://../../assets/icons/history@2x.png',
-  },
+    {
+        title: '查询详细垃圾投放记录',
+        icon: 'image://../../assets/icons/history@2x.png'
+    }
 ]
 
 export default class AboutMe extends Component {
-  constructor(props) {
-    super(props)
+    constructor(props) {
+        super(props)
 
 
-  }
+    }
 
-  componentWillMount() {}
+    componentWillMount() {
+    }
 
-  componentDidMount() {}
+    componentDidMount() {
+    }
 
-  componentWillUnmount() {}
+    componentWillUnmount() {
+    }
 
-  componentDidShow() {}
+    componentDidShow() {
+    }
 
-  componentDidHide() {}
+    componentDidHide() {
+    }
 
-  logoutHandler() {
-      setGlobalData('userName', '')
-      setGlobalData('userId', '')
-      setGlobalData('userCredit', '')
-      NavigationService.navigate('/pages/home/home-page')
-      // Taro.navigateBack({
-      //     delta: 1
-      // })
-  }
+    logoutHandler() {
+        setGlobalData('userName', '')
+        setGlobalData('userId', '')
+        setGlobalData('userCredit', '')
+        NavigationService.navigate('/pages/home/home-page')
+        // Taro.navigateBack({
+        //     delta: 1
+        // })
+    }
 
-  render() {
-    return (
-      <View className="me-page">
-        {/*<view>*/}
-        {/*  <Listof list={this.state.userCard} displayMode="big-card" />*/}
-        {/*</view>*/}
-        <View className="me-page-body">
-          {/*{lineItemNavigatorList.map((it) => (*/}
-          {/*  <NavigationLineItem key={`${it.id}_${it.code}`} {...it} />*/}
-          {/*))}*/}
-            <AtButton type="primary" onClick={this.logoutHandler}>
-                退出登录
-            </AtButton>
-        </View>
-      </View>
-    )
-  }
+    render() {
+        return (
+            <View className='me-page'>
+                {/*<view>*/}
+                {/*  <Listof list={this.state.userCard} displayMode="big-card" />*/}
+                {/*</view>*/}
+                <View className='me-page-body'>
+                    {/*{lineItemNavigatorList.map((it) => (*/}
+                    {/*  <NavigationLineItem key={`${it.id}_${it.code}`} {...it} />*/}
+                    {/*))}*/}
+                    <AtButton type='primary' onClick={this.logoutHandler}>
+                        退出登录
+                    </AtButton>
+                </View>
+            </View>
+        )
+    }
 }
