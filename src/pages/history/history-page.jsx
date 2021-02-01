@@ -45,72 +45,72 @@ export default class HistoryPage extends Component {
     updateHistoryFromServer(isFullList) {
         let srvUrl
         if (isFullList) {
-            srvUrl = getGlobalData('server') + '/get-waste-list-all'
+            srvUrl = getGlobalData('server') + '/api/users/' + getGlobalData('userId') + '/wastes'
         } else {
-            srvUrl = getGlobalData('server') + '/get-waste-list-top20'
+            srvUrl = getGlobalData('server') + '/api/users/' + getGlobalData('userId') + '/wastes?n=20'
         }
 
         Taro.request({
             url: srvUrl,
             method: 'GET',
-            data: {
-                id: getGlobalData('userId')
-            },
+            data: {},
             dataType: 'json',
             success: (res) => {
                 console.log('request succeeded')
                 console.log(res.data)
                 const newWasteListItem = []
-                res.data.forEach((element, index, array) => {
-                    var categoryNameChs = ''
-                    var wasteImage = ''
-                    if (element.category === 'HAZARDOUS_WASTE') {
-                        categoryNameChs = '有害垃圾'
-                        wasteImage = imgHazardousWaste
-                    } else if (element.category === 'RESIDUAL_WASTE') {
-                        categoryNameChs = '其他垃圾'
-                        wasteImage = imgResidualWaste
-                    } else if (element.category === 'RECYCLABLE_WASTE') {
-                        categoryNameChs = '可回收垃圾'
-                        wasteImage = imgRecyclableWaste
-                    } else if (element.category === 'FOOD_WASTE') {
-                        categoryNameChs = '厨余垃圾'
-                        wasteImage = imgFoodWaste
-                    }
-
-                    var dateFormatted = ''
-                    dateFormatted = element.time.substring(0, 19).replace('T', ' ')
-
-                    newWasteListItem.push({
-                        id: element.id,
-                        title:
-                            dateFormatted.substring(5, 7) + '月' + dateFormatted.substring(8, 10) + '日 ' + categoryNameChs + ' ' + element.weight + 'kg',
-                        brief: dateFormatted + ', ' + element.dustbin.name,
-                        imageUrl: wasteImage,
-                        mode: ['circle']
-                    })
-                })
-
-                if (newWasteListItem.length < 20) {
-                    if (newWasteListItem.length === 0) {
-                        newWasteListItem.push({
-                            id: 1,
-                            title: '暂无'
-                        })
-                    }
-
+                if (Object.keys(res.data).length === 0) {
+                    console.log('not getting any waste list')
                     this.setState({
-                        wasteList: newWasteListItem,
+                        wasteList: [{
+                            id: 1,
+                            title: '暂无记录'
+                        }],
                         isFullListLoaded: true
                     })
                 } else {
-                    this.setState((state) => ({
-                        wasteList: newWasteListItem,
-                        isFullListLoaded: isFullList
-                    }))
+                    res.data._embedded.wasteList.forEach((element, index, array) => {
+                        var categoryNameChs = ''
+                        var wasteImage = ''
+                        if (element.category === 'HAZARDOUS_WASTE') {
+                            categoryNameChs = '有害垃圾'
+                            wasteImage = imgHazardousWaste
+                        } else if (element.category === 'RESIDUAL_WASTE') {
+                            categoryNameChs = '其他垃圾'
+                            wasteImage = imgResidualWaste
+                        } else if (element.category === 'RECYCLABLE_WASTE') {
+                            categoryNameChs = '可回收垃圾'
+                            wasteImage = imgRecyclableWaste
+                        } else if (element.category === 'FOOD_WASTE') {
+                            categoryNameChs = '厨余垃圾'
+                            wasteImage = imgFoodWaste
+                        }
+
+                        var dateFormatted = ''
+                        dateFormatted = element.time.substring(0, 19).replace('T', ' ')
+
+                        newWasteListItem.push({
+                            id: element.id,
+                            title:
+                                dateFormatted.substring(5, 7) + '月' + dateFormatted.substring(8, 10) + '日 ' + categoryNameChs + ' ' + element.weight + 'kg',
+                            brief: dateFormatted + ', ' + element.dustbin.name,
+                            imageUrl: wasteImage,
+                            mode: ['circle']
+                        })
+                    })
+
+                    if (newWasteListItem.length < 20) {
+                        this.setState({
+                            wasteList: newWasteListItem,
+                            isFullListLoaded: true
+                        })
+                    } else {
+                        this.setState((state) => ({
+                            wasteList: newWasteListItem,
+                            isFullListLoaded: isFullList
+                        }))
+                    }
                 }
-
-
             },
             fail: (res) => {
                 console.log('request failed')

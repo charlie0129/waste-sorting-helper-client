@@ -14,8 +14,8 @@ export default class RegisterPage extends Component {
         super(props)
         console.log('register page constructed')
         this.state = {
-            enteredId: '',
-            enteredName: ''
+            enteredId: undefined,
+            enteredName: undefined
         }
     }
 
@@ -55,14 +55,11 @@ export default class RegisterPage extends Component {
         console.log('User entered name: ' + this.state.enteredName)
 
         Taro.request({
-            url: getGlobalData('server') + '/add-user',
+            url: getGlobalData('server') + '/api/users',
             method: 'POST',
             data: {
                 id: this.state.enteredId,
                 name: this.state.enteredName
-            },
-            header: {
-                'content-type': 'application/x-www-form-urlencoded'
             },
             success: (res) => {
                 if (res.statusCode == 409) {

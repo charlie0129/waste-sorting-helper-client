@@ -14,10 +14,9 @@ export default function PasswordForm() {
 
     const handleSubmit = () => {
         Taro.request({
-            url: getGlobalData('server') + '/get-user',
+            url: getGlobalData('server') + '/api/users/'+login,
             method: 'GET',
             data: {
-                id: login
             },
             dataType: 'json',
             success: (res) => {
@@ -30,41 +29,18 @@ export default function PasswordForm() {
                     })
                 } else {
                     setGlobalData('userId', login)
-                    setGlobalData('userName', res.data)
+                    setGlobalData('userName', res.data.name)
                     console.log('get-user succeed')
                     console.log(res)
                     console.log(getGlobalData('userId'))
                     console.log(getGlobalData('userName'))
 
-                    Taro.request({
-                        url: getGlobalData('server') + '/get-credit',
-                        method: 'GET',
-                        data: {
-                            id: getGlobalData('userId')
-                        },
-                        dataType: 'json',
-                        success: (res) => {
-                            if (res.data == '') {
-                                Taro.atMessage({
-                                    message: '获取积分出错',
-                                    type: 'error'
-                                })
-                            } else {
-                                setGlobalData('userCredit', res.data)
-                                Taro.atMessage({
-                                    message: '登录成功',
-                                    type: 'success'
-                                })
-                                NavigationService.back({}, this)
-                            }
-                        },
-                        fail: (res) => {
-                            Taro.atMessage({
-                                message: '获取积分出错',
-                                type: 'error'
-                            })
-                        }
+                    setGlobalData('userCredit', res.data.credit)
+                    Taro.atMessage({
+                        message: '登录成功',
+                        type: 'success'
                     })
+                    NavigationService.back({}, this)
                 }
             },
             fail: (res) => {

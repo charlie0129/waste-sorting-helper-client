@@ -95,20 +95,25 @@ export default class HomePage extends Component {
     componentDidHide() {
         if (getGlobalData('userId') !== '') {
             Taro.request({
-                url: getGlobalData('server') + '/get-credit',
+                url: getGlobalData('server') + '/api/users/'+getGlobalData('userId'),
                 method: 'GET',
                 data: {
-                    id: getGlobalData('userId')
                 },
                 dataType: 'json',
                 success: (res) => {
-                    if (res.data == '') {
+                    if (res.statusCode !== 200) {
                     } else {
-                        setGlobalData('userCredit', res.data)
+                        setGlobalData('userCredit', res.data.credit)
+                        console.log('successfully refreshed credit')
                     }
-                    console.log('successfully updated credit: ' + res.data)
                 },
                 fail: (res) => {
+                    Taro.atMessage({
+                        message: '刷新积分错误',
+                        type: 'error'
+                    })
+
+                    console.log('get-credit failed')
                 }
             })
         }
