@@ -5,7 +5,8 @@ export default {
     'pages/login/login-page',
     'pages/history/history-page',
     'pages/map/map-page',
-    'pages/register/register-page'
+    'pages/register/register-page',
+    'pages/category-data/category-data-page'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -22,15 +23,15 @@ export default {
     list: [
       {
         pagePath: 'pages/home/home-page',
-        iconPath: './assets/icons/icon_home_n@2x.png',
-        selectedIconPath: './assets/icons/icon_home_s@2x.png',
+        iconPath: './assets/icons/ios-home.png',
+        selectedIconPath: './assets/icons/ios-home.png',
         text: '首页',
       },
       {
-        pagePath: 'pages/about-me/about-me-page',
-        iconPath: './assets/icons/icon_me_n@2x.png',
-        selectedIconPath: './assets/icons/icon_me_s@2x.png',
-        text: '我的',
+        pagePath: 'pages/category-data/category-data-page',
+        iconPath: './assets/icons/ios-search.png',
+        selectedIconPath: './assets/icons/ios-search.png',
+        text: '查询',
       },
     ],
   }

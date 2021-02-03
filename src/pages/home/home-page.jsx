@@ -11,6 +11,7 @@ import userImage from '../../assets/icons/md-person.png'
 import cameraImage from '../../assets/icons/ios-camera.png'
 import statsImage from '../../assets/icons/ios-stats.png'
 import trashImage from '../../assets/icons/md-trash.png'
+import listImage from '../../assets/icons/ios-list.png'
 import 'taro-ui/dist/style/components/button.scss'
 import './home-page.scss'
 
@@ -42,6 +43,14 @@ export default class HomePage extends Component {
                     breif: '',
                     mode: ['small'],
                     imageUrl: statsImage
+                },
+                {
+                    id: 4,
+                    title: '查询分类知识',
+                    linkToUrl: 'page:///pages/category-data/category-data-page',
+                    brief: '',
+                    mode: ['small'],
+                    imageUrl: listImage
                 }
             ],
             userCard: []
