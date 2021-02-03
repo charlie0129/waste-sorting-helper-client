@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AtButton, AtIcon, AtMessage } from 'taro-ui'
+import { AtButton, AtIcon, AtMessage, AtList, AtListItem } from 'taro-ui'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import ActionFloor from '@/components/navigation/action-floor'
@@ -19,40 +19,6 @@ export default class HomePage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            actionList: [
-                {
-                    id: 1,
-                    title: '扫码扔垃圾',
-                    linkToUrl: 'page:///pages/about-me/about-me-page',
-                    brief: '',
-                    mode: ['small'],
-                    imageUrl: cameraImage
-                },
-                {
-                    id: 2,
-                    title: '查询垃圾投放点',
-                    linkToUrl: 'page:///pages/map/map-page',
-                    brief: '',
-                    mode: ['small'],
-                    imageUrl: trashImage
-                },
-                {
-                    id: 3,
-                    title: '查询垃圾投放记录',
-                    linkToUrl: 'page:///pages/history/history-page',
-                    breif: '',
-                    mode: ['small'],
-                    imageUrl: statsImage
-                },
-                {
-                    id: 4,
-                    title: '查询分类知识',
-                    linkToUrl: 'page:///pages/category-data/category-data-page',
-                    brief: '',
-                    mode: ['small'],
-                    imageUrl: listImage
-                }
-            ],
             userCard: []
         }
     }
@@ -152,8 +118,42 @@ export default class HomePage extends Component {
 
                 {getGlobalData('userId') !== '' && (
                     <view>
-                        <Listof list={this.state.actionList} displayMode='h-card' />
+                        <AtList>
+                            <AtListItem
+                                title='扫码扔垃圾'
+                                arrow='right'
+                                thumb={cameraImage}
+                                onClick={() => {
+                                    NavigationService.navigate('/pages/about-me/about-me-page')
+                                }}
+                            />
+                            <AtListItem
+                                title='查询垃圾投放点'
+                                arrow='right'
+                                thumb={trashImage}
+                                onClick={() => {
+                                    NavigationService.navigate('/pages/map/map-page')
+                                }}
+                            />
+                            <AtListItem
+                                title='查询垃圾投放记录'
+                                arrow='right'
+                                thumb={statsImage}
+                                onClick={() => {
+                                    NavigationService.navigate('/pages/history/history-page')
+                                }}
+                            />
+                            <AtListItem
+                                title='查询分类知识'
+                                arrow='right'
+                                thumb={listImage}
+                                onClick={() => {
+                                    NavigationService.navigate('/pages/category-data/category-data-page')
+                                }}
+                            />
+                        </AtList>
                     </view>
+
                 )}
                 {/* <view>
             <Listof list={this.state.actionList} displayMode="h-card" />
