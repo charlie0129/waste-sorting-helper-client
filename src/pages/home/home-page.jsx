@@ -116,45 +116,46 @@ export default class HomePage extends Component {
           <AtIcon value="clock" size="30" color="#976bff" />
         </view> */}
 
-                {getGlobalData('userId') !== '' && (
-                    <view>
-                        <AtList>
-                            <AtListItem
-                                title='扫码扔垃圾'
-                                arrow='right'
-                                thumb={cameraImage}
-                                onClick={() => {
-                                    NavigationService.navigate('/pages/about-me/about-me-page')
-                                }}
-                            />
-                            <AtListItem
-                                title='查询垃圾投放点'
-                                arrow='right'
-                                thumb={trashImage}
-                                onClick={() => {
-                                    NavigationService.navigate('/pages/map/map-page')
-                                }}
-                            />
-                            <AtListItem
-                                title='查询垃圾投放记录'
-                                arrow='right'
-                                thumb={statsImage}
-                                onClick={() => {
-                                    NavigationService.navigate('/pages/history/history-page')
-                                }}
-                            />
-                            <AtListItem
-                                title='查询分类知识'
-                                arrow='right'
-                                thumb={listImage}
-                                onClick={() => {
-                                    NavigationService.navigate('/pages/category-data/category-data-page')
-                                }}
-                            />
-                        </AtList>
-                    </view>
-
-                )}
+                <view>
+                    <AtList>
+                        <AtListItem
+                            title='扫码扔垃圾'
+                            arrow='right'
+                            thumb={cameraImage}
+                            disabled={getGlobalData('userId') === ''}
+                            onClick={() => {
+                                NavigationService.navigate('/pages/about-me/about-me-page')
+                            }}
+                        />
+                        <AtListItem
+                            title='查询垃圾投放点'
+                            arrow='right'
+                            thumb={trashImage}
+                            disabled={getGlobalData('userId') === ''}
+                            onClick={() => {
+                                NavigationService.navigate('/pages/map/map-page')
+                            }}
+                        />
+                        <AtListItem
+                            title='查询垃圾投放记录'
+                            arrow='right'
+                            thumb={statsImage}
+                            disabled={getGlobalData('userId') === ''}
+                            onClick={() => {
+                                NavigationService.navigate('/pages/history/history-page')
+                            }}
+                        />
+                        <AtListItem
+                            title='查询分类知识'
+                            arrow='right'
+                            thumb={listImage}
+                            disabled={getGlobalData('userId') === ''}
+                            onClick={() => {
+                                NavigationService.navigate('/pages/category-data/category-data-page')
+                            }}
+                        />
+                    </AtList>
+                </view>
                 {/* <view>
             <Listof list={this.state.actionList} displayMode="h-card" />
         </view> */}

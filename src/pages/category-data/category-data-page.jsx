@@ -54,7 +54,7 @@ export default class CategoryData extends Component {
             })
         }
         let searchResultFormatted = []
-        if(searchResult_!==undefined){
+        if (searchResult_ !== undefined) {
             searchResult_.forEach((element, index, array) => {
                 // RECYCLEABLE: 1, // 可回收物
                 // HAZARDOUS: 2, // 有害垃圾
@@ -64,26 +64,31 @@ export default class CategoryData extends Component {
                 // BIG_GARBAGE: 6, // 大件垃圾
                 // NON_LIFE_GARBAGE: 7, // 非生活垃圾
                 let itemImg = undefined
-                if (element.categoryId === 1) {
+                let category = ''
+                if (element.categoryId === 1) { // 可回收垃圾
                     itemImg = imgRecyclableWaste
-                } else if (element.categoryId === 2) {
+                    category = '可回收垃圾'
+                } else if (element.categoryId === 2) { // 有害垃圾
                     itemImg = imgHazardousWaste
-                } else if (element.categoryId === 3) {
+                    category = '有害垃圾'
+                } else if (element.categoryId === 3) { // 厨余垃圾
                     itemImg = imgFoodWaste
-                } else {
+                    category = '厨余垃圾'
+                } else { // 干垃圾、装修垃圾、大件垃圾、非生活垃圾全算其他垃圾
                     itemImg = imgResidualWaste
+                    category = '其他垃圾'
                 }
 
                 searchResultFormatted.push({
                     id: index,
                     title: element.garbageName, // + '  ' + '【'+element.categoryName+'】',
                     // TODO: linkToUrl: 'page:///pages/map/map-page',
-                    brief: element.categoryName,
+                    brief: category,
                     mode: ['circle'],
                     imageUrl: itemImg
                 })
             })
-        }else{
+        } else {
             searchResultFormatted.push({
                 id: 0,
                 title: '没有查到结果，换个词试试',
@@ -117,6 +122,6 @@ export default class CategoryData extends Component {
                     this.state.textFieldValue !== '' && (<Listof list={this.state.searchResult} displayMode='h-card' />)
                 }
             </view>
-    )
+        )
     }
 }
