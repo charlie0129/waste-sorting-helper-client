@@ -45,7 +45,7 @@ export default class CategoryData extends Component {
         this.setState({
             textFieldValue
         })
-        let searchResult_ = undefined
+        let searchResult_ = []
         if (textFieldValue !== '') {
             console.log('Searching for: ' + textFieldValue)
             searchWasteDatabase(textFieldValue, (res) => {
@@ -54,7 +54,7 @@ export default class CategoryData extends Component {
             })
         }
         let searchResultFormatted = []
-        if (searchResult_ !== undefined) {
+        if (searchResult_.length !== 0) {
             searchResult_.forEach((element, index, array) => {
                 // RECYCLEABLE: 1, // 可回收物
                 // HAZARDOUS: 2, // 有害垃圾
@@ -89,14 +89,16 @@ export default class CategoryData extends Component {
                 })
             })
         } else {
-            searchResultFormatted.push({
-                id: 0,
-                title: '没有查到结果，换个词试试',
-                // TODO: linkToUrl: 'page:///pages/map/map-page',
-                brief: '',
-                mode: ['small'],
-                imageUrl: imgHelp
-            })
+            if (textFieldValue !== '') {
+                searchResultFormatted.push({
+                    id: 0,
+                    title: '没有查到结果，换个词试试',
+                    brief: '',
+                    mode: ['small'],
+                    imageUrl: imgHelp
+                })
+            }
+
         }
 
         this.setState({
@@ -118,9 +120,7 @@ export default class CategoryData extends Component {
                     value={this.state.textFieldValue}
                     onChange={this.handleChange.bind(this)}
                 />
-                {
-                    this.state.textFieldValue !== '' && (<Listof list={this.state.searchResult} displayMode='h-card' />)
-                }
+                <Listof list={this.state.searchResult} displayMode='h-card' />
             </view>
         )
     }
