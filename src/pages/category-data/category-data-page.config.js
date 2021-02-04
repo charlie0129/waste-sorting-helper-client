@@ -1,3 +1,3 @@
 export default {
-    navigationBarTitleText: '分类信息查询'
+    navigationBarTitleText: '分类知识'
 }

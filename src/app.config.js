@@ -6,7 +6,8 @@ export default {
     'pages/history/history-page',
     'pages/map/map-page',
     'pages/register/register-page',
-    'pages/category-data/category-data-page'
+    'pages/category-data/category-data-page',
+    'pages/search/search-page'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -28,7 +29,7 @@ export default {
         text: '首页',
       },
       {
-        pagePath: 'pages/category-data/category-data-page',
+        pagePath: 'pages/search/search-page',
         iconPath: './assets/icons/ios-search.png',
         selectedIconPath: './assets/icons/ios-search.png',
         text: '查询',

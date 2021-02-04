@@ -149,7 +149,6 @@ export default class HomePage extends Component {
                             title='查询分类知识'
                             arrow='right'
                             thumb={listImage}
-                            disabled={getGlobalData('userId') === ''}
                             onClick={() => {
                                 NavigationService.navigate('/pages/category-data/category-data-page')
                             }}

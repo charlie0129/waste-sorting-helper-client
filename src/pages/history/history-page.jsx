@@ -140,7 +140,7 @@ export default class HistoryPage extends Component {
         this.updateHistoryFromServer(true)
     }
 
-    render() {
+    render() { // TODO: use taro-ui 'LoadMore'
         return (
             <View className='home-page'>
                 <Listof list={this.state.wasteList} displayMode='h-card' />
