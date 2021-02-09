@@ -1,4 +1,3 @@
 {
-    "extends": ["taro/react"],
-    "taro/react/jsx-indent-props": 4
+    "extends": ["taro/react"]
 }

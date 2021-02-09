@@ -131,6 +131,26 @@ export default class HistoryPage extends Component {
     componentDidShow() {
         console.log('history page shown')
         this.updateHistoryFromServer(false)
+
+        Taro.request({
+            url: getGlobalData('server') + '/api/users/'+getGlobalData('userId')+'/credit',
+            method: 'GET',
+            success: (res) => {
+                if (res.statusCode !== 200) {
+                } else {
+                    setGlobalData('userCredit', res.data)
+                    console.log('successfully refreshed credit')
+                }
+            },
+            fail: () => {
+                Taro.atMessage({
+                    message: '刷新积分错误',
+                    type: 'error'
+                })
+
+                console.log('get-credit failed')
+            }
+        })
     }
 
     componentDidHide() {

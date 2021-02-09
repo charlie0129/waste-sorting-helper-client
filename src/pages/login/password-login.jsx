@@ -28,19 +28,36 @@ export default function PasswordForm() {
                         type: 'error'
                     })
                 } else {
+                    Taro.request({
+                        url: getGlobalData('server') + '/api/users/'+login+'/credit',
+                        method: 'GET',
+                        success: (res) => {
+                            if (res.statusCode !== 200) {
+                            } else {
+                                setGlobalData('userCredit', res.data)
+                                console.log('successfully refreshed credit: '+res.data)
+                            }
+                            NavigationService.back({}, this)
+                        },
+                        fail: () => {
+                            Taro.atMessage({
+                                message: '刷新积分错误',
+                                type: 'error'
+                            })
+
+                            console.log('get-credit failed')
+                        }
+                    })
                     setGlobalData('userId', login)
                     setGlobalData('userName', res.data.name)
                     console.log('get-user succeed')
                     console.log(res)
                     console.log(getGlobalData('userId'))
                     console.log(getGlobalData('userName'))
-
-                    setGlobalData('userCredit', res.data.credit)
                     Taro.atMessage({
                         message: '登录成功',
                         type: 'success'
                     })
-                    NavigationService.back({}, this)
                 }
             },
             fail: (res) => {
