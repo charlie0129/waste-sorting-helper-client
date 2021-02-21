@@ -8,7 +8,7 @@ const globalData = {
   userName: '',
   userId: '',
   userCredit: 'loading...',
-  server: 'http://localhost:8080'
+  server: 'http://loaclhost:10883'
 }
 
 function getDevice() {
