@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AtButton, AtIcon, AtMessage, AtList, AtListItem } from 'taro-ui'
+import { AtButton, AtIcon, AtMessage, AtList, AtListItem, AtToast } from 'taro-ui'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import ActionFloor from '@/components/navigation/action-floor'
@@ -19,9 +19,12 @@ export default class HomePage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            userCard: []
+            userCard: [],
+            isLoading: false,
+            didShowAtMessage: true
         }
     }
+
 
     componentWillMount() {
     }
@@ -34,10 +37,15 @@ export default class HomePage extends Component {
 
     componentDidShow() {
         console.log('home page shown')
-        // this.state.userId = getGlobalData('userId');
-        // this.setState(state => ({
-        //   userId: getGlobalData('userId')
-        // }));
+
+        // make <AtMessage /> show up
+        this.setState(() => ({
+            didShowAtMessage: false
+        }))
+        this.setState(() => ({
+            didShowAtMessage: true
+        }))
+
         if (getGlobalData('userId') === '') {
             Taro.atMessage({
                 message: '您还没登录，请先登录',
@@ -74,10 +82,108 @@ export default class HomePage extends Component {
         NavigationService.navigate('/pages/login/login-page')
     }
 
+    setToast(isOn) {
+        this.setState(() => ({
+            isLoading: isOn
+        }))
+    }
+
+    scanQRCode() {
+        Taro.scanCode({
+            success: (scres) => {
+                console.log('scan result:')
+                console.log(scres)
+                this.setToast(true)
+
+                Taro.request({
+                    url: getGlobalData('server') + '/api/dustbins/' + scres.result + '/requests',
+                    method: 'POST',
+                    data: {
+                        userId: getGlobalData('userId'),
+                        dustbinId: scres.result
+                    },
+                    success: (res) => {
+                        if (res.statusCode === 201) {
+                            console.log('ready to check result')
+
+                            let round = -1
+                            const ROUND_LIMIT = 4
+                            let interval = setInterval(() => {
+                                if(++round>=1){
+                                    console.log('checking result, round=' + round)
+
+                                    if (round >= ROUND_LIMIT) {
+                                        console.log('checking done, result=failed')
+                                        Taro.atMessage({
+                                            message: '开盖失败，垃圾桶未及时响应',
+                                            type: 'error'
+                                        })
+                                        this.setToast(false)
+                                        clearInterval(interval)
+                                    }
+
+                                    Taro.request({
+                                        url: getGlobalData('server') + '/api/dustbins/' + scres.result + '/requests/' + res.data.requestId,
+                                        method: 'GET',
+                                        success: (res_) => {
+                                            console.log(res_)
+                                            if (res_.statusCode === 200 && res_.data.type === 0) {
+                                                console.log('checking done, result=succeed')
+                                                Taro.atMessage({
+                                                    message: '开盖成功',
+                                                    type: 'success'
+                                                })
+                                                this.setToast(false)
+                                                clearInterval(interval)
+                                            }
+                                        }
+                                    })
+                                }
+                            }, 2000)
+
+
+                        } else {
+                            console.log('error: return code not 201')
+                            this.setToast(false)
+                            Taro.atMessage({
+                                message: '开盖过程中发生错误，垃圾桶无法被连接',
+                                type: 'error'
+                            })
+                        }
+                    },
+                    fail: () => {
+                        this.setToast(false)
+                        Taro.atMessage({
+                            message: '网络错误',
+                            type: 'error'
+                        })
+
+                    },
+                    complete: (res) => {
+                        console.log('completed')
+                        console.log(res)
+                    }
+                })
+
+
+            },
+            fail: () => {
+                Taro.atMessage({
+                    message: '发生错误',
+                    type: 'error'
+                })
+            }
+        })
+
+    }
+
     render() {
         return (
             <View className='home-page'>
-                <AtMessage />
+                {this.state.didShowAtMessage && (<AtMessage />)}
+
+                <AtToast isOpened={this.state.isLoading} text='正在开盖' status='loading' duration={0} />
+
                 <view>
                     {getGlobalData('userId') === '' && (
                         <AtButton type='primary' onClick={this.loginHandler} className='login-button'>
@@ -88,9 +194,6 @@ export default class HomePage extends Component {
                         <Listof list={this.state.userCard} displayMode='big-card' />
                     )}
                 </view>
-                {/* <view>
-          <AtIcon value="clock" size="30" color="#976bff" />
-        </view> */}
 
                 <view>
                     <AtList>
@@ -100,7 +203,7 @@ export default class HomePage extends Component {
                             thumb={cameraImage}
                             disabled={getGlobalData('userId') === ''}
                             onClick={() => {
-                                NavigationService.navigate('/pages/about-me/about-me-page')
+                                this.scanQRCode()
                             }}
                         />
                         <AtListItem
