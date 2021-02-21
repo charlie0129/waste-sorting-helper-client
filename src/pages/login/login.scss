@@ -1,5 +1,6 @@
 @import 'src/styles/theme';
 @import "~taro-ui/dist/style/components/message.scss";
+@import "~taro-ui/dist/style/components/toast.scss";
 
 .login-page {
   @extend %page;

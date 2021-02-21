@@ -3,16 +3,19 @@ import { Block, View } from '@tarojs/components'
 import { setGlobalData, getGlobalData } from '@/utils/index'
 import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
-import { AtButton, AtMessage, AtInput, AtForm } from 'taro-ui'
+import { AtButton, AtMessage, AtInput, AtForm, AtToast } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
 
 import './login.scss'
 
 export default function PasswordForm() {
     const [login, setLogin] = useState()
+    const [isLoading, setLoading] = useState(false)
     // const [password, setPassword] = useState()
 
+
     const handleSubmit = () => {
+        setLoading(true)
         Taro.request({
             url: getGlobalData('server') + '/api/users/'+login,
             method: 'GET',
@@ -32,14 +35,17 @@ export default function PasswordForm() {
                         url: getGlobalData('server') + '/api/users/'+login+'/credit',
                         method: 'GET',
                         success: (res) => {
+                            setLoading(false)
                             if (res.statusCode !== 200) {
                             } else {
                                 setGlobalData('userCredit', res.data)
                                 console.log('successfully refreshed credit: '+res.data)
                             }
+                            setLoading(false)
                             NavigationService.back({}, this)
                         },
                         fail: () => {
+                            setLoading(false)
                             Taro.atMessage({
                                 message: '刷新积分错误',
                                 type: 'error'
@@ -61,6 +67,7 @@ export default function PasswordForm() {
                 }
             },
             fail: (res) => {
+                setLoading(false)
                 Taro.atMessage({
                     message: '登录错误',
                     type: 'error'
@@ -78,6 +85,7 @@ export default function PasswordForm() {
 
     return (
         <Block>
+            <AtToast isOpened={isLoading} text='请稍等' status='loading' duration={0} />
             <View className='login-form-fields'>
                 <AtMessage />
                 <EleInput

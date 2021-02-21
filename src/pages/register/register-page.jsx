@@ -4,7 +4,7 @@ import { Block, Text, View } from '@tarojs/components'
 import React, { Component, useState } from 'react'
 import NavigationService from '@/nice-router/navigation-service'
 import { setGlobalData, getGlobalData } from '@/utils/index'
-import { AtButton, AtMessage, AtInput, AtForm } from 'taro-ui'
+import { AtButton, AtMessage, AtInput, AtForm, AtToast } from 'taro-ui'
 
 import './register-page.scss'
 
@@ -15,7 +15,8 @@ export default class RegisterPage extends Component {
         console.log('register page constructed')
         this.state = {
             enteredId: undefined,
-            enteredName: undefined
+            enteredName: undefined,
+            isLoading: false
         }
     }
 
@@ -33,6 +34,12 @@ export default class RegisterPage extends Component {
     }
 
     componentDidHide() {
+    }
+
+    setToast(isOn) {
+        this.setState(() => ({
+            isLoading: isOn
+        }))
     }
 
     setEnteredId(enteredId) {
@@ -53,25 +60,29 @@ export default class RegisterPage extends Component {
         console.log('Register button clicked!')
         console.log('User entered ID: ' + this.state.enteredId)
         console.log('User entered name: ' + this.state.enteredName)
+        this.setToast(true)
 
         Taro.request({
             url: getGlobalData('server') + '/api/users',
             method: 'POST',
             data: {
                 id: this.state.enteredId,
-                name: this.state.enteredName
+                name: this.state.enteredName,
+                credit: 0
             },
             success: (res) => {
                 if (res.statusCode == 409) {
                     console.log('add-user: duplicated user')
                     console.log(res)
+                    this.setToast(false)
                     Taro.atMessage({
                         message: '学号已被注册',
                         type: 'error'
                     })
-                } else if (res.statusCode == 200) {
+                } else if (res.statusCode == 201) {
                     console.log('add-user: succeed')
                     console.log(res)
+                    this.setToast(false)
                     Taro.atMessage({
                         message: '注册成功',
                         type: 'success'
@@ -82,6 +93,7 @@ export default class RegisterPage extends Component {
                 } else {
                     console.log('add-user: failed')
                     console.log(res)
+                    this.setToast(false)
                     Taro.atMessage({
                         message: '发生错误',
                         type: 'error'
@@ -89,6 +101,7 @@ export default class RegisterPage extends Component {
                 }
             },
             fail: (res) => {
+                this.setToast(false)
                 Taro.atMessage({
                     message: '网络错误',
                     type: 'error'
@@ -102,6 +115,7 @@ export default class RegisterPage extends Component {
     render() {
         return (
             <View className='login-page'>
+                <AtToast isOpened={this.state.isLoading} text='请稍等' status='loading' duration={0} />
                 <View className='login-page-header'>
                     <View className='login-page-header-txt'>
                         <Text>注册</Text>
@@ -139,6 +153,7 @@ export default class RegisterPage extends Component {
                     </Block>
                 </View>
             </View>
+
         )
     }
 }
