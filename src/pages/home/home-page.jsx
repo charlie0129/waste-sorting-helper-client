@@ -62,7 +62,7 @@ export default class HomePage extends Component {
                     getGlobalData('userId') +
                     '\n积分：' +
                     getGlobalData('userCredit'),
-                status: '已登录',
+                // status: '已登录',
                 imageUrl: userImage,
                 mode: ['circle'],
                 linkToUrl: 'page://pages/about-me/about-me-page'

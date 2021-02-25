@@ -17,9 +17,9 @@ export default {
         enablePullDownRefresh: true
     },
     tabBar: {
-        color: '#666',
-        selectedColor: '#6e44cc',
-        backgroundColor: '#fafafa',
+        color: '#4a4a4a',
+        selectedColor: '#2f5fb7',
+        backgroundColor: '#eeeded',
         borderStyle: 'black',
         list: [
             {
@@ -38,7 +38,7 @@ export default {
     },
     "permission": {
         "scope.userLocation": {
-            "desc": "你的位置信息仅用于展示附近的垃圾投放点，并且不会被上传至任何位置"
+            "desc": "你的位置仅用于展示附近的垃圾投放点，不会被上传至任何位置"
         }
     }
 }

@@ -35,12 +35,15 @@ export default function PasswordForm() {
                         url: getGlobalData('server') + '/api/users/'+login+'/credit',
                         method: 'GET',
                         success: (res) => {
-                            setLoading(false)
                             if (res.statusCode !== 200) {
                             } else {
                                 setGlobalData('userCredit', res.data)
                                 console.log('successfully refreshed credit: '+res.data)
                             }
+                            Taro.atMessage({
+                                message: '登录成功',
+                                type: 'success'
+                            })
                             setLoading(false)
                             NavigationService.back({}, this)
                         },
@@ -60,10 +63,6 @@ export default function PasswordForm() {
                     console.log(res)
                     console.log(getGlobalData('userId'))
                     console.log(getGlobalData('userName'))
-                    Taro.atMessage({
-                        message: '登录成功',
-                        type: 'success'
-                    })
                 }
             },
             fail: (res) => {
