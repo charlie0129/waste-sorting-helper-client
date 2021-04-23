@@ -23,7 +23,7 @@ See also: [waste-sorting-helper-server](https://github.com/charlie0129/waste-sor
 2. Install Taro (if not installed already)
 
    ```shell
-   npm i -g @tarojs/cli
+   npm i -g @tarojs/cli@3.2.5
    ```
 
 3. Install dependencies
@@ -36,7 +36,7 @@ See also: [waste-sorting-helper-server](https://github.com/charlie0129/waste-sor
 4. Build project
 
     ```shell
-    taro build --type weapp
+    npm run build:weapp
     ```
 
 5. Open `Wechat Devtools` and run the project at `./dist`
