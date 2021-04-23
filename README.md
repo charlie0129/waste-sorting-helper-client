@@ -19,27 +19,29 @@ See also: [waste-sorting-helper-server](https://github.com/charlie0129/waste-sor
 1. Clone this repository
 
    `git clone --depth=1 https://github.com/charlie0129/waste-sorting-helper-client.git`
+   
+2. Install [Node.js](https://nodejs.org) (version >= 12)
 
-2. Install Taro (if not installed already)
+3. Install Taro (if not installed already)
 
    ```shell
    npm i -g @tarojs/cli@3.2.5
    ```
 
-3. Install dependencies
+4. Install dependencies
 
    ```shell
    cd waste-sorting-helper-client
    npm install
    ```
 
-4. Build project
+5. Build project
 
     ```shell
     npm run build:weapp
     ```
 
-5. Open `Wechat Devtools` and run the project at `./dist`
+6. Open `Wechat Devtools` and run the project at `./dist`
 
 
 ## Git Commit Guidelines
