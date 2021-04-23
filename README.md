@@ -8,19 +8,19 @@ See also: [waste-sorting-helper-server](https://github.com/charlie0129/waste-sor
     - [x] Rubbish bin ID
     - [x] Date
 - User Credit
-    - [ ] A user gains credits by correctly classifying the waste and loses his credits if not.
+    - [x] A user gains credits by correctly classifying the waste and loses his credits if not.
     - [ ] A threshold on the total weight of wastes is set for every user and is reset every week. Exceeding the threshold will cause the user to lose his credits.
 - Information on Installed Rubbish Bins
-    - [ ] Location
-    - [ ] Full or not
+    - [x] Location
+    - [x] Full or not
 
 ## How to run this project
 
 1. Clone this repository
 
-   `https://github.com/charlie0129/waste-sorting-helper-client.git`
+   `git clone --depth=1 https://github.com/charlie0129/waste-sorting-helper-client.git`
 
-2. Install Taro
+2. Install Taro (if not installed already)
 
    ```shell
    npm i -g @tarojs/cli
@@ -33,13 +33,13 @@ See also: [waste-sorting-helper-server](https://github.com/charlie0129/waste-sor
    npm install
    ```
 
-4. Build & run
+4. Build project
 
     ```shell
     taro build --type weapp
     ```
 
-5. Open `Wechat Devtools` and run the project at `/dist`
+5. Open `Wechat Devtools` and run the project at `./dist`
 
 
 ## Git Commit Guidelines
