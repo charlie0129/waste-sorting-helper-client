@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import { AtButton, AtIcon, AtMessage, AtList, AtListItem, AtToast } from 'taro-ui'
+import { AtButton, AtList, AtListItem, AtMessage, AtToast } from 'taro-ui'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import ActionFloor from '@/components/navigation/action-floor'
 import NavigationService from '@/nice-router/navigation-service'
-import SectionBar from '@/components/section-bar/section-bar'
-import { setGlobalData, getGlobalData } from '@/utils/index'
+import { getGlobalData } from '@/utils/index'
 import Listof from '@/listof/listof'
 import userImage from '../../assets/icons/md-person.png'
 import cameraImage from '../../assets/icons/ios-camera.png'
@@ -109,7 +107,7 @@ export default class HomePage extends Component {
                             let round = -1
                             const ROUND_LIMIT = 4
                             let interval = setInterval(() => {
-                                if(++round>=1){
+                                if (++round >= 1) {
                                     console.log('checking result, round=' + round)
 
                                     if (round >= ROUND_LIMIT) {

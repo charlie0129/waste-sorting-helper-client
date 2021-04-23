@@ -8,7 +8,7 @@ module.exports = {
     NON_LIFE_GARBAGE: 7, // 非生活垃圾
 
     getCategoryName(value) {
-        var categoryNameArray = ['可回收物','有害垃圾','湿垃圾','干垃圾','装修垃圾','大件垃圾','非生活垃圾'] ;
-        return categoryNameArray[value];
-    },
-};
+        var categoryNameArray = ['可回收物', '有害垃圾', '湿垃圾', '干垃圾', '装修垃圾', '大件垃圾', '非生活垃圾']
+        return categoryNameArray[value]
+    }
+}

@@ -1,9 +1,9 @@
 import EleInput from '@/components/form/field/ele-input'
 import { Block, View } from '@tarojs/components'
-import { setGlobalData, getGlobalData } from '@/utils/index'
+import { getGlobalData, setGlobalData } from '@/utils/index'
 import React, { useState } from 'react'
 import Taro from '@tarojs/taro'
-import { AtButton, AtMessage, AtInput, AtForm, AtToast } from 'taro-ui'
+import { AtButton, AtMessage, AtToast } from 'taro-ui'
 import NavigationService from '@/nice-router/navigation-service'
 
 import './login.scss'
@@ -17,10 +17,9 @@ export default function PasswordForm() {
     const handleSubmit = () => {
         setLoading(true)
         Taro.request({
-            url: getGlobalData('server') + '/api/users/'+login,
+            url: getGlobalData('server') + '/api/users/' + login,
             method: 'GET',
-            data: {
-            },
+            data: {},
             dataType: 'json',
             success: (res) => {
                 if (res.statusCode !== 200) {
@@ -32,13 +31,13 @@ export default function PasswordForm() {
                     })
                 } else {
                     Taro.request({
-                        url: getGlobalData('server') + '/api/users/'+login+'/credit',
+                        url: getGlobalData('server') + '/api/users/' + login + '/credit',
                         method: 'GET',
                         success: (res) => {
                             if (res.statusCode !== 200) {
                             } else {
                                 setGlobalData('userCredit', res.data)
-                                console.log('successfully refreshed credit: '+res.data)
+                                console.log('successfully refreshed credit: ' + res.data)
                             }
                             Taro.atMessage({
                                 message: '登录成功',

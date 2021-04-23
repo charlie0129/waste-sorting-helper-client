@@ -1,10 +1,8 @@
-import EleInput from '@/components/form/field/ele-input'
 import Taro from '@tarojs/taro'
 import { Block, Text, View } from '@tarojs/components'
-import React, { Component, useState } from 'react'
-import NavigationService from '@/nice-router/navigation-service'
-import { setGlobalData, getGlobalData } from '@/utils/index'
-import { AtButton, AtMessage, AtInput, AtForm, AtToast } from 'taro-ui'
+import React, { Component } from 'react'
+import { getGlobalData } from '@/utils/index'
+import { AtButton, AtInput, AtMessage, AtToast } from 'taro-ui'
 
 import './register-page.scss'
 

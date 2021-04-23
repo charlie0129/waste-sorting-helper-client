@@ -1,26 +1,13 @@
 import React, { Component } from 'react'
-import Taro from '@tarojs/taro'
 import { View } from '@tarojs/components'
 import { AtButton } from 'taro-ui'
-import Listof from '@/listof/listof'
-import { setGlobalData, getGlobalData } from '@/utils/index'
+import { setGlobalData } from '@/utils/index'
 import NavigationService from '@/nice-router/navigation-service'
-import NavigationLineItem from '@/components/navigation/navigation-line-item'
 import './about-me-page.scss'
-
-
-const lineItemNavigatorList = [
-    {
-        title: '查询详细垃圾投放记录',
-        icon: 'image://../../assets/icons/history@2x.png'
-    }
-]
 
 export default class AboutMe extends Component {
     constructor(props) {
         super(props)
-
-
     }
 
     componentWillMount() {

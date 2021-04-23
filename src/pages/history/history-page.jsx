@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
-import { AtButton, AtIcon } from 'taro-ui'
+import { AtButton } from 'taro-ui'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import ActionFloor from '@/components/navigation/action-floor'
-import NavigationService from '@/nice-router/navigation-service'
-import SectionBar from '@/components/section-bar/section-bar'
-import { setGlobalData, getGlobalData } from '@/utils/index'
+import { getGlobalData, setGlobalData } from '@/utils/index'
 import Listof from '@/listof/listof'
 import 'taro-ui/dist/style/components/button.scss'
 import './history-page.scss'
@@ -133,7 +130,7 @@ export default class HistoryPage extends Component {
         this.updateHistoryFromServer(false)
 
         Taro.request({
-            url: getGlobalData('server') + '/api/users/'+getGlobalData('userId')+'/credit',
+            url: getGlobalData('server') + '/api/users/' + getGlobalData('userId') + '/credit',
             method: 'GET',
             success: (res) => {
                 if (res.statusCode !== 200) {

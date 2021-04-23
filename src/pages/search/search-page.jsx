@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
-import Taro from '@tarojs/taro'
-import { View } from '@tarojs/components'
-import { AtButton, AtInput, AtForm } from 'taro-ui'
+import { AtInput } from 'taro-ui'
 import Listof from '@/listof/listof'
-import { setGlobalData, getGlobalData } from '@/utils/index'
-import NavigationService from '@/nice-router/navigation-service'
-import NavigationLineItem from '@/components/navigation/navigation-line-item'
 import searchWasteDatabase from '../../utils/category-data/garbage-search'
 import imgFoodWaste from '../../assets/icons/food-waste.png'
 import imgHazardousWaste from '../../assets/icons/hazardous-waste.png'
@@ -13,7 +8,6 @@ import imgResidualWaste from '../../assets/icons/residual-waste.png'
 import imgRecyclableWaste from '../../assets/icons/recyclable-waste.png'
 import imgHelp from '../../assets/icons/ios-help.png'
 import './search-page.scss'
-import trashImage from '../../assets/icons/md-trash.png'
 
 
 export default class CategoryData extends Component {

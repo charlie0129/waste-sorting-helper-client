@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View, Map } from '@tarojs/components'
+import { Map, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { AtMessage } from 'taro-ui'
-import { setGlobalData, getGlobalData } from '@/utils/index'
+import { getGlobalData } from '@/utils/index'
 import './map-page.scss'
 
 export default class MapPage extends Component {
